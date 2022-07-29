@@ -16,8 +16,17 @@
       <div class="container-fluid bg-warning">
           <div class="row">
               <div class="col-md">
+                <?php 
+                session_start();
+                if(empty($_SESSION["cui"])){
+                    $title = 'Pruebas';
+                }
+                else {
+                    $title = $_SESSION["cui"];
+                }
+                ?>
                   <header class="py-3">
-                      <h3 class="text-center">Prueba</h3>
+                      <h3 class="text-center"><?php echo $title;?></h3>
                   </header>
               </div>
           </div>

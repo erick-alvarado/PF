@@ -12,6 +12,7 @@ create table persona(
 );
 
 INSERT INTO persona(cui, nombre, telefono,direccion,contrasena) VALUES 
+select * from persona where cui = 2831827410101 and contrasena = 'contrasena1'
 
 ('2831827410101','Erick Alvarado','58496745','san lucas','contrasena1'),
 ('2831827415678','Alexander Guerra','45738549','guatemala','contrasena2'),
