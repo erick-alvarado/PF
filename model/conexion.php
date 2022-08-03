@@ -10,11 +10,8 @@ $dbname = "prueba";
 $bd = mysqli_connect($host, $dbuser, $dbpass, $dbname);
   
 // Check connection
-if(mysqli_connect_error())
-{
- echo "Connection establishing failed!";
-}
-else
-{
-}
+if (!$bd) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+  
 ?>

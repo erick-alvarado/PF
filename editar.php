@@ -9,11 +9,20 @@
     include_once 'model/conexion.php';
     $id = $_GET['id'];
 
-    $sentencia = $bd->prepare("select * from persona where id = ?;");
-    $sentencia -> bind_param("s", $id);
-    $sentencia->execute();
-    $result = $sentencia->get_result();
-    $persona = $result->fetch_assoc();
+    /*
+    $sql = "select * from persona where id = $id;";
+    $result = mysqli_query($bd, $sql);
+    $persona = mysqli_fetch_assoc($result);
+    */ 
+    
+    $stmt = mysqli_prepare($bd, "select * from persona where id = ?;");
+    mysqli_stmt_bind_param($stmt,  "s", $id);
+    mysqli_stmt_execute($stmt);
+    $resultado =  mysqli_stmt_get_result($stmt);
+
+    $persona = mysqli_fetch_assoc($resultado);
+
+    mysqli_close($bd);
     //print_r($persona);
 ?>
 

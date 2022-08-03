@@ -6,11 +6,22 @@
     }
     include_once 'model/conexion.php';
 
+    /*
     $sentencia = $bd->prepare("select * from persona where id = ?;");
     $sentencia -> bind_param("s", $_SESSION["id"]);
     $sentencia->execute();
     $result = $sentencia->get_result();
     $persona = $result->fetch_assoc();
+    */
+    
+    $stmt = mysqli_prepare($bd, "select * from persona where id = ?;");
+    mysqli_stmt_bind_param($stmt,  "s",  $_SESSION["id"]);
+    mysqli_stmt_execute($stmt);
+    $resultado =  mysqli_stmt_get_result($stmt);
+    $persona = mysqli_fetch_assoc($resultado);
+
+    mysqli_close($bd);
+
     //print_r($persona);
 ?>
 

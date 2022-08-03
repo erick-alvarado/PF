@@ -12,9 +12,19 @@
     $direccion = $_POST["txtDireccion"];
     $contrasena = $_POST["txtContrasena"];
     
-
+    /*
     $sentencia = $bd->prepare("INSERT INTO persona(cui, nombre, telefono,direccion,contrasena) VALUES (?,?,?,?,?);");
-    $resultado = $sentencia->execute([$cui,$nombre,$telefono,$direccion,$contrasena]);
+    $sentencia -> bind_param("sssss", $cui,$nombre,$telefono,$direccion,$contrasena);
+    $sentencia->execute();
+    */
+
+
+    $stmt = mysqli_prepare($bd, "INSERT INTO persona(cui, nombre, telefono,direccion,contrasena) VALUES (?,?,?,?,?);");
+    mysqli_stmt_bind_param($stmt, "sssss", $cui,$nombre,$telefono,$direccion,$contrasena);
+    $resultado = mysqli_stmt_execute($stmt);
+    
+    mysqli_close($bd);
+
     if ($resultado === TRUE) {
         header('Location: index.php?mensaje=registrado');
     } else {

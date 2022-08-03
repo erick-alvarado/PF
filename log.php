@@ -10,13 +10,22 @@
     $contrasena = $_POST["txtContrasena"];
     
 
+    /*
     $sentencia = $bd->prepare("select * from persona where cui = ? and contrasena = ?");
     $sentencia -> bind_param("ss", $cui,$contrasena);
     $sentencia->execute();
     $result = $sentencia->get_result();
     $persona = $result->fetch_assoc();
+    */
 
-    print_r($persona);
+    $stmt = mysqli_prepare($bd, "select * from persona where cui = ? and contrasena = ?");
+    mysqli_stmt_bind_param($stmt,  "ss", $cui,$contrasena);
+    mysqli_stmt_execute($stmt);
+    $resultado =  mysqli_stmt_get_result($stmt);
+    $persona = mysqli_fetch_assoc($resultado);
+
+    mysqli_close($bd);
+
     if ($persona) {
         session_start();
         $_SESSION["id"]=$persona['id'];

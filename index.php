@@ -2,9 +2,15 @@
 
 <?php
     include_once "model/conexion.php";
-    $sentencia = $bd -> query("select * from persona");
-    $persona = mysqli_fetch_all($sentencia,MYSQLI_ASSOC);
-    //print_r($persona);
+    //$sentencia = $bd -> query("select * from persona");
+    //$persona = mysqli_fetch_all($sentencia,MYSQLI_ASSOC);
+
+    $sql = "select * from persona";
+    $result = mysqli_query($bd, $sql);
+    $persona = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    mysqli_close($bd);
+
 ?>
 
 <div class="container mt-5">
